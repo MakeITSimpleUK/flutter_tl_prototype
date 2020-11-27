@@ -53,28 +53,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _oAuth({override_url}) async {
-    try {
-      String url = override_url ??
-          'https://auth.truelayer-sandbox.com/?response_type=code&client_id=sandbox-ezcoclient-7792ff&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://applinktest2.makeitsimple.co.uk/oauthredirect/&providers=uk-ob-all%20uk-oauth-all%20uk-cs-mock';
-      print('attempting TL oauth url $url');
-//      final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: (override_url != null) ? "https" : "tlauth");
-      final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: "tlauth");
-      print("got the result");
-      print(result);
-      LocalNotifications.send('Truelayer', 'Response $result');
-      final accessCode = Uri.parse(result).queryParameters['code'];
-      print('access code is ' + accessCode);
-    } catch (error) {
-      print('error in authflow $error');
-      LocalNotifications.send('Truelayer authflow error', '$error');
-    }
-  }
 
   void _oAuthLive({override_url}) async {
     try {
       String url = override_url ??
-          'https://auth.truelayer.com/?response_type=code&client_id=beam-7b9cf8&scope=info%20accounts%20transactions%20offline_access&redirect_uri=https://applinktest2.makeitsimple.co.uk/oauthredirect/&providers=uk-ob-all%20uk-oauth-all';
+          'http://www.ourepicapp.com/redirect';
       print('attempting TL oauth url $url');
       final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: "tlauth");
       print("got the result");
@@ -99,72 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              child: Text('Authenticate sandbox using deep link'),
-              onPressed: _oAuth,
-            ),
-//            RaisedButton(
-//              child: Text('Authenticate sandbox using app link'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer-sandbox.com/?response_type=code&client_id=sandbox-ezcoclient-7792ff&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://applinktest2.makeitsimple.co.uk/oauthredirect/&providers=uk-ob-all%20uk-oauth-all%20uk-cs-mock');
-//              },
-//            ),
-            RaisedButton(
-              child: Text('Authenticate live using deep link'),
+              child: Text('Authenticate'),
               onPressed: _oAuthLive,
             ),
-//            RaisedButton(
-//              child: Text('Authenticate live using app link'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer.com/?response_type=code&client_id=beam-7b9cf8&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://applinktest2.makeitsimple.co.uk/oauthredirect/&providers=uk-ob-all%20uk-oauth-all');
-//              },
-//            ),
-//            SizedBox(
-//              height: 50,
-//            ),
-//            RaisedButton(
-//              child: Text('Authenticate sandbox using app link form POST'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer-sandbox.com/?response_type=code&response_mode=form_post&client_id=sandbox-ezcoclient-7792ff&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://applinktest2.makeitsimple.co.uk/oauthredirect/&providers=uk-ob-all%20uk-oauth-all%20uk-cs-mock');
-//              },
-//            ),
-//            RaisedButton(
-//              child: Text('Authenticate sandbox console redirect'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer-sandbox.com/?response_type=code&client_id=sandbox-ezcoclient-7792ff&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://console.truelayer-sandbox.com/redirect-page&providers=uk-ob-all%20uk-oauth-all%20uk-cs-mock');
-//              },
-//            ),
-//            RaisedButton(
-//              child: Text('Authenticate sandbox console redirect form POST'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer-sandbox.com/?response_type=code&response_mode=form_post&client_id=sandbox-ezcoclient-7792ff&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://console.truelayer-sandbox.com/redirect-page&providers=uk-ob-all%20uk-oauth-all%20uk-cs-mock');
-//              },
-//            ),
-//            RaisedButton(
-//              child: Text('Authenticate live console redirect'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer.com/?response_type=code&client_id=beam-7b9cf8&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://console.truelayer.com/redirect-page&providers=uk-ob-all%20uk-oauth-all');
-//              },
-//            ),
-//            RaisedButton(
-//              child: Text('Authenticate live console redirect form POST'),
-//              onPressed: () {
-//                _oAuth(
-//                    override_url:
-//                        'https://auth.truelayer.com/?response_type=code&response_mode=form_post&client_id=beam-7b9cf8&scope=transactions%20accounts%20info%20offline_access&redirect_uri=https://console.truelayer.com/redirect-page&providers=uk-ob-all%20uk-oauth-all');
-//              },
-//            ),
           ],
         ),
       ),
